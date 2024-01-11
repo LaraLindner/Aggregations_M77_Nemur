@@ -1,0 +1,110 @@
+# Requires the PyMongo package.
+# https://api.mongodb.com/python/current
+
+from datetime import datetime, tzinfo, timezone
+from pymongo import MongoClient
+
+client = MongoClient('mongodb://127.0.0.1:27018/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
+result = client['VSB_cattle']['Concentrate_data'].aggregate([
+    {
+        '$match': {
+            'IsoDate': {
+                '$gt': datetime(2024, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
+            }, 
+            'MetaData.FeedingDevice': {
+                '$in': [
+                    '05_C_Cow', '06_C_Cow'
+                ]
+            }
+        }
+    }, {
+        '$project': {
+            'Transponder': 1, 
+            'AnimalID': 1, 
+            'IsoDate': 1, 
+            'Date': 1, 
+            'Duration': 1, 
+            'Intake_Silo04_C_cow': 1, 
+            'Metadata': {
+                '$objectToArray': '$MetaData'
+            }
+        }
+    }, {
+        '$lookup': {
+            'from': 'Basic_data_RIC', 
+            'let': {
+                'animalID': '$AnimalID', 
+                'date': '$Date'
+            }, 
+            'pipeline': [
+                {
+                    '$match': {
+                        '$expr': {
+                            '$and': [
+                                {
+                                    '$eq': [
+                                        '$AnimalID', '$$animalID'
+                                    ]
+                                }, {
+                                    '$eq': [
+                                        '$Date', '$$date'
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            ], 
+            'as': 'BasicData'
+        }
+    }, {
+        '$project': {
+            'AnimalID': 1, 
+            'AnimalNumber': {
+                '$arrayElemAt': [
+                    '$BasicData.Animalnumber', 0
+                ]
+            }, 
+            'IsoDate': 1, 
+            'Date': 1, 
+            'Transponder': 1, 
+            'Duration': 1, 
+            'Intake_Silo04_C_cow': 1, 
+            'Barn': {
+                '$arrayElemAt': [
+                    '$BasicData.Barn', 0
+                ]
+            }, 
+            'FeedingDevice': {
+                '$arrayElemAt': [
+                    '$Metadata.v', 0
+                ]
+            }, 
+            'CupMaxPerVisitWindow': {
+                '$arrayElemAt': [
+                    '$Metadata.v', 4
+                ]
+            }, 
+            'MaxVisitWindow': {
+                '$arrayElemAt': [
+                    '$Metadata.v', 2
+                ]
+            }, 
+            'UsedCups': {
+                '$arrayElemAt': [
+                    '$Metadata.v', 3
+                ]
+            }, 
+            'VisitWindow': {
+                '$arrayElemAt': [
+                    '$Metadata.v', 1
+                ]
+            }
+        }
+    }, {
+        '$out': {
+            'db': 'Masterdata', 
+            'coll': 'M77_KF_GF_DG4-6'
+        }
+    }
+])

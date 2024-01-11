@@ -1,0 +1,100 @@
+# Requires the PyMongo package.
+# https://api.mongodb.com/python/current
+
+from datetime import datetime, tzinfo, timezone
+from pymongo import MongoClient
+
+client = MongoClient('mongodb://127.0.0.1:27018/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
+result = client['VSB_cattle']['Roughage_data'].aggregate([
+    {
+        '$match': {
+            'IsoDate': {
+                '$gt': datetime(2023, 2, 25, 0, 0, 0, tzinfo=timezone.utc)
+            }, 
+            'MetaData.FeedingDevice': {
+                '$in': [
+                    '09_R_Cow', '10_R_Cow', '11_R_Cow', '12_R_Cow', '13_R_Cow', '14_R_Cow', '15_R_Cow', '16_R_Cow', '17_R_Cow', '18_R_Cow', '19_R_Cow', '20_R_Cow', '21_R_Cow', '22_R_Cow', '23_R_Cow', '24_R_Cow', '25_R_Cow', '26_R_Cow', '27_R_Cow', '28_R_Cow', '29_R_Cow', '30_R_Cow', '31_R_Cow', '32_R_Cow', '33_R_Cow', '34_R_Cow', '35_R_Cow', '36_R_Cow', '37_R_Cow', '38_R_Cow', '39_R_Cow', '40_R_Cow', '41_R_Cow', '42_R_Cow', '43_R_Cow', '44_R_Cow', '45_R_Cow', '46_R_Cow', '47_R_Cow', '48_R_Cow', '49_R_Cow', '50_R_Cow', '51_R_Cow', '52_R_Cow', '53_R_Cow', '54_R_Cow', '55_R_Cow', '56_R_Cow', '57_R_Cow', '58_R_Cow', '59_R_Cow', '60_R_Cow', '61_R_Cow', '62_R_Cow', '63_R_Cow', '64_R_Cow', '65_R_Cow', '66_R_Cow', '67_R_Cow', '68_R_Cow'
+                ]
+            }
+        }
+    }, {
+        '$project': {
+            'Transponder': 1, 
+            'AnimalID': 1, 
+            'IsoDate': 1, 
+            'Date': 1, 
+            'Duration': 1, 
+            'Intake_R_cow': 1, 
+            'Metadata': {
+                '$objectToArray': '$MetaData'
+            }
+        }
+    }, {
+        '$lookup': {
+            'from': 'Basic_data_RIC', 
+            'let': {
+                'animalID': '$AnimalID', 
+                'date': '$Date'
+            }, 
+            'pipeline': [
+                {
+                    '$match': {
+                        '$expr': {
+                            '$and': [
+                                {
+                                    '$eq': [
+                                        '$AnimalID', '$$animalID'
+                                    ]
+                                }, {
+                                    '$eq': [
+                                        '$Date', '$$date'
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            ], 
+            'as': 'BasicData'
+        }
+    }, {
+        '$project': {
+            'AnimalID': 1, 
+            'AnimalNumber': {
+                '$arrayElemAt': [
+                    '$BasicData.Animalnumber', 0
+                ]
+            }, 
+            'IsoDate': 1, 
+            'Date': 1, 
+            'Transponder': 1, 
+            'Duration': 1, 
+            'Intake_Silo04_C_cow': 1, 
+            'Barn': {
+                '$arrayElemAt': [
+                    '$BasicData.Barn', 0
+                ]
+            }, 
+            'FeedingDevice': {
+                '$arrayElemAt': [
+                    '$Metadata.v', 0
+                ]
+            }, 
+            'TroughWeightStart': {
+                '$arrayElemAt': [
+                    '$Metadata.v', 2
+                ]
+            }, 
+            'TroughWeightEnd': {
+                '$arrayElemAt': [
+                    '$Metadata.v', 3
+                ]
+            }
+        }
+    }, {
+        '$out': {
+            'db': 'Masterdata', 
+            'coll': 'M77_Roughage_singleIntake'
+        }
+    }
+])

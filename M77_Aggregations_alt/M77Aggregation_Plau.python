@@ -1,0 +1,222 @@
+# Requires the PyMongo package.
+# https://api.mongodb.com/python/current
+
+from datetime import datetime, tzinfo, timezone
+from pymongo import MongoClient
+
+client = MongoClient('mongodb://127.0.0.1:27018/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
+result = client['VSB_cattle']['Basic_data_RIC'].aggregate([
+    {
+        '$project': {
+            'Transponder': 1, 
+            'Animalnumber': 1, 
+            'AnimalID': 1, 
+            'IsoDate': 1, 
+            'Date': 1, 
+            'Barn': 1
+        }
+    }, {
+        '$match': {
+            'IsoDate': {
+                '$gt': datetime(2023, 2, 13, 0, 0, 0, tzinfo=timezone.utc)
+            }, 
+            'Animalnumber': {
+                '$in': [
+                    '638', '652', '705', '709', '711', '717', '727', '735', '741', '745', '748', '754', '802', '804', '806', '807', '814', '815', '818', '822', '823', '824', '842', '850', '851', '852', '855', '856', '901', '903', '911', '913', '930', '934', '935', '938', '939', '941', '942', '943', '948', '6111', '6113', '6114', '6125', '6133', '6140', '6144', '6147', '6149', '6150', '6175'
+                ]
+            }
+        }
+    }, {
+        '$lookup': {
+            'from': 'Liveweight_data_Pl', 
+            'let': {
+                'animalID': '$AnimalID', 
+                'date': '$Date'
+            }, 
+            'pipeline': [
+                {
+                    '$match': {
+                        '$expr': {
+                            '$and': [
+                                {
+                                    '$eq': [
+                                        '$AnimalID', '$$animalID'
+                                    ]
+                                }, {
+                                    '$eq': [
+                                        '$Date', '$$date'
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            ], 
+            'as': 'LiveweightData'
+        }
+    }, {
+        '$lookup': {
+            'from': 'Milking_data', 
+            'let': {
+                'animalID': '$AnimalID', 
+                'date': '$Date'
+            }, 
+            'pipeline': [
+                {
+                    '$match': {
+                        '$expr': {
+                            '$and': [
+                                {
+                                    '$eq': [
+                                        '$AnimalID', '$$animalID'
+                                    ]
+                                }, {
+                                    '$eq': [
+                                        '$Date', '$$date'
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            ], 
+            'as': 'Milk'
+        }
+    }, {
+        '$lookup': {
+            'from': 'Concentrate_data', 
+            'let': {
+                'animalID': '$AnimalID', 
+                'date': '$Date'
+            }, 
+            'pipeline': [
+                {
+                    '$match': {
+                        '$expr': {
+                            '$and': [
+                                {
+                                    '$eq': [
+                                        '$AnimalID', '$$animalID'
+                                    ]
+                                }, {
+                                    '$eq': [
+                                        '$Date', '$$date'
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            ], 
+            'as': 'Conc'
+        }
+    }, {
+        '$lookup': {
+            'from': 'Roughage_data_Pl', 
+            'let': {
+                'animalID': '$AnimalID', 
+                'date': '$Date'
+            }, 
+            'pipeline': [
+                {
+                    '$match': {
+                        '$expr': {
+                            '$and': [
+                                {
+                                    '$eq': [
+                                        '$AnimalID', '$$animalID'
+                                    ]
+                                }, {
+                                    '$eq': [
+                                        '$Date', '$$date'
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            ], 
+            'as': 'Roughage'
+        }
+    }, {
+        '$lookup': {
+            'from': 'Water_data_Pl', 
+            'let': {
+                'animalID': '$AnimalID', 
+                'date': '$Date'
+            }, 
+            'pipeline': [
+                {
+                    '$match': {
+                        '$expr': {
+                            '$and': [
+                                {
+                                    '$eq': [
+                                        '$AnimalID', '$$animalID'
+                                    ]
+                                }, {
+                                    '$eq': [
+                                        '$Date', '$$date'
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            ], 
+            'as': 'Water'
+        }
+    }, {
+        '$project': {
+            'Transponder': 1, 
+            'Animalnumber': 1, 
+            'AnimalID': 1, 
+            'IsoDate': 1, 
+            'Date': 1, 
+            'Barn': 1, 
+            'Liveweight_morning': {
+                '$arrayElemAt': [
+                    '$LiveweightData.Liveweight', 0
+                ]
+            }, 
+            'Liveweight_evening': {
+                '$arrayElemAt': [
+                    '$LiveweightData.Liveweight', 1
+                ]
+            }, 
+            'MilkAmount_morning': {
+                '$arrayElemAt': [
+                    '$Milk.Amount', 0
+                ]
+            }, 
+            'MilkAmount_evening': {
+                '$arrayElemAt': [
+                    '$Milk.Amount', 1
+                ]
+            }, 
+            'ConcentrateSilo1': {
+                '$sum': '$Conc.Intake_Silo01_C_cow'
+            }, 
+            'ConcentrateSilo2': {
+                '$sum': '$Conc.Intake_Silo02_C_cow'
+            }, 
+            'ConcentrateSilo3': {
+                '$sum': '$Conc.Intake_Silo03_C_cow'
+            }, 
+            'ConcentrateSilo4': {
+                '$sum': '$Conc.Intake_Silo04_C_cow'
+            }, 
+            'Roughage': {
+                '$sum': '$Roughage.Intake_R_cow'
+            }, 
+            'Water': {
+                '$sum': '$Water.Intake_W_cow'
+            }
+        }
+    }, {
+        '$out': {
+            'db': 'Masterdata', 
+            'coll': 'M77_Plau'
+        }
+    }
+])
