@@ -42,7 +42,7 @@ If the newly generated collections need to be accessible from external sources, 
 AG-Daten-BSW@fli.de
 
 ## Authors
-Fabian Billenkamp
+Lara Lindner
 
 ## Project Status
 Completed
