@@ -53,6 +53,21 @@ The scripts can be executed directly from the command line or scheduled via cron
 Importent:
 If the newly generated collections need to be accessible from external sources, please contact the support team. In such cases, the corresponding MongoDB access schema needs to be adjusted accordingly.
 
+Important for Support:
+Schema adjustment and starting Mongo DRDL
+
+Procedure:
+1. Log in to BioInf Server wirh admin rights
+2. Open the console
+3. Enter the following command to create a new schema. You can also adjust an existing one, but this is very error-prone. 
+<pre> ```bash
+	mongodrdl --db Masterdata --out NameSchema.drdl --host 127.0.0.1 --port 27018
+	``` </pre>
+4. Start the schema with the following console command. This console must remain open!
+<pre> ```bash
+	mongosqld --schema NameSchema.drdl --addr 172.19.224.5:3307 --mongo-uri 172.19.224.5:27018
+	``` </pre>
+
 ## Support
 AG-Daten-BSW@fli.de
 
