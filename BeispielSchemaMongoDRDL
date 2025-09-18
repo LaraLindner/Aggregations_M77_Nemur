@@ -1,0 +1,735 @@
+schema:
+- db: Masterdata
+  tables:
+  - table: CalfData
+    collection: CalfData
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: AnimalNumber
+      MongoType: string
+      SqlName: AnimalNumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: Breed
+      MongoType: string
+      SqlName: Breed
+      SqlType: varchar
+    - Name: Concentrate_Foerster
+      MongoType: float64
+      SqlName: Concentrate_Foerster
+      SqlType: float
+    - Name: Concentrate_RIC
+      MongoType: float64
+      SqlName: Concentrate_RIC
+      SqlType: float
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: DateOfBirth
+      MongoType: string
+      SqlName: DateOfBirth
+      SqlType: varchar
+    - Name: Father
+      MongoType: string
+      SqlName: Father
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Liveweight
+      MongoType: float64
+      SqlName: Liveweight
+      SqlType: float
+    - Name: LiveweightAtBirth
+      MongoType: float64
+      SqlName: LiveweightAtBirth
+      SqlType: float
+    - Name: MilkIntake
+      MongoType: float64
+      SqlName: MilkIntake
+      SqlType: float
+    - Name: MilkSuctionSpeedAbs
+      MongoType: float64
+      SqlName: MilkSuctionSpeedAbs
+      SqlType: float
+    - Name: MilkSuctionSpeedPerc
+      MongoType: float64
+      SqlName: MilkSuctionSpeedPerc
+      SqlType: float
+    - Name: Milktype
+      MongoType: string
+      SqlName: Milktype
+      SqlType: varchar
+    - Name: Mother
+      MongoType: string
+      SqlName: Mother
+      SqlType: varchar
+    - Name: ProductionGroup
+      MongoType: string
+      SqlName: ProductionGroup
+      SqlType: varchar
+    - Name: Sex
+      MongoType: string
+      SqlName: Sex
+      SqlType: varchar
+  - table: DairyCows_01/2023
+    collection: DairyCows_01/2023
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: Animalnumber
+      MongoType: string
+      SqlName: Animalnumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Sex
+      MongoType: string
+      SqlName: Sex
+      SqlType: varchar
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+  - table: M77
+    collection: M77
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: Animalnumber
+      MongoType: string
+      SqlName: Animalnumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: ConcentrateSilo1
+      MongoType: float64
+      SqlName: ConcentrateSilo1
+      SqlType: float
+    - Name: ConcentrateSilo2
+      MongoType: float64
+      SqlName: ConcentrateSilo2
+      SqlType: float
+    - Name: ConcentrateSilo3
+      MongoType: float64
+      SqlName: ConcentrateSilo3
+      SqlType: float
+    - Name: ConcentrateSilo4
+      MongoType: bson.Decimal128
+      SqlName: ConcentrateSilo4
+      SqlType: decimal
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Liveweight_evening
+      MongoType: float64
+      SqlName: Liveweight_evening
+      SqlType: float
+    - Name: Liveweight_morning
+      MongoType: float64
+      SqlName: Liveweight_morning
+      SqlType: float
+    - Name: MilkAmount_evening
+      MongoType: string
+      SqlName: MilkAmount_evening
+      SqlType: varchar
+    - Name: MilkAmount_morning
+      MongoType: string
+      SqlName: MilkAmount_morning
+      SqlType: varchar
+    - Name: Roughage
+      MongoType: float64
+      SqlName: Roughage
+      SqlType: float
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: Water
+      MongoType: float64
+      SqlName: Water
+      SqlType: float
+  - table: M77_DG4-6
+    collection: M77_DG4-6
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: Animalnumber
+      MongoType: string
+      SqlName: Animalnumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: ConcentrateSilo1
+      MongoType: float64
+      SqlName: ConcentrateSilo1
+      SqlType: float
+    - Name: ConcentrateSilo2
+      MongoType: float64
+      SqlName: ConcentrateSilo2
+      SqlType: float
+    - Name: ConcentrateSilo3
+      MongoType: float64
+      SqlName: ConcentrateSilo3
+      SqlType: float
+    - Name: ConcentrateSilo4
+      MongoType: bson.Decimal128
+      SqlName: ConcentrateSilo4
+      SqlType: decimal
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Liveweight_evening
+      MongoType: float64
+      SqlName: Liveweight_evening
+      SqlType: float
+    - Name: Liveweight_morning
+      MongoType: float64
+      SqlName: Liveweight_morning
+      SqlType: float
+    - Name: MilkAmount_evening
+      MongoType: string
+      SqlName: MilkAmount_evening
+      SqlType: varchar
+    - Name: MilkAmount_morning
+      MongoType: string
+      SqlName: MilkAmount_morning
+      SqlType: varchar
+    - Name: Roughage
+      MongoType: float64
+      SqlName: Roughage
+      SqlType: float
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: Water
+      MongoType: float64
+      SqlName: Water
+      SqlType: float
+  - table: M77_DG7-9
+    collection: M77_DG7-9
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: Animalnumber
+      MongoType: string
+      SqlName: Animalnumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: ConcentrateSilo1
+      MongoType: float64
+      SqlName: ConcentrateSilo1
+      SqlType: float
+    - Name: ConcentrateSilo2
+      MongoType: float64
+      SqlName: ConcentrateSilo2
+      SqlType: float
+    - Name: ConcentrateSilo3
+      MongoType: float64
+      SqlName: ConcentrateSilo3
+      SqlType: float
+    - Name: ConcentrateSilo4
+      MongoType: bson.Decimal128
+      SqlName: ConcentrateSilo4
+      SqlType: decimal
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Liveweight_evening
+      MongoType: float64
+      SqlName: Liveweight_evening
+      SqlType: float
+    - Name: Liveweight_morning
+      MongoType: float64
+      SqlName: Liveweight_morning
+      SqlType: float
+    - Name: MilkAmount_evening
+      MongoType: string
+      SqlName: MilkAmount_evening
+      SqlType: varchar
+    - Name: MilkAmount_morning
+      MongoType: string
+      SqlName: MilkAmount_morning
+      SqlType: varchar
+    - Name: Roughage
+      MongoType: float64
+      SqlName: Roughage
+      SqlType: float
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: Water
+      MongoType: float64
+      SqlName: Water
+      SqlType: float
+  - table: M77_KF_GF
+    collection: M77_KF_GF
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: AnimalNumber
+      MongoType: string
+      SqlName: AnimalNumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: CupMaxPerVisitWindow
+      MongoType: string
+      SqlName: CupMaxPerVisitWindow
+      SqlType: varchar
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: Duration
+      MongoType: bson.Decimal128
+      SqlName: Duration
+      SqlType: decimal
+    - Name: FeedingDevice
+      MongoType: string
+      SqlName: FeedingDevice
+      SqlType: varchar
+    - Name: Intake_Silo04_C_cow
+      MongoType: bson.Decimal128
+      SqlName: Intake_Silo04_C_cow
+      SqlType: decimal
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: MaxVisitWindow
+      MongoType: string
+      SqlName: MaxVisitWindow
+      SqlType: varchar
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: UsedCups
+      MongoType: string
+      SqlName: UsedCups
+      SqlType: varchar
+    - Name: VisitWindow
+      MongoType: string
+      SqlName: VisitWindow
+      SqlType: varchar
+  - table: M77_Plau
+    collection: M77_Plau
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: Animalnumber
+      MongoType: string
+      SqlName: Animalnumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: ConcentrateSilo1
+      MongoType: float64
+      SqlName: ConcentrateSilo1
+      SqlType: float
+    - Name: ConcentrateSilo2
+      MongoType: float64
+      SqlName: ConcentrateSilo2
+      SqlType: float
+    - Name: ConcentrateSilo3
+      MongoType: float64
+      SqlName: ConcentrateSilo3
+      SqlType: float
+    - Name: ConcentrateSilo4
+      MongoType: bson.Decimal128
+      SqlName: ConcentrateSilo4
+      SqlType: decimal
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Liveweight_evening
+      MongoType: float64
+      SqlName: Liveweight_evening
+      SqlType: float
+    - Name: Liveweight_morning
+      MongoType: float64
+      SqlName: Liveweight_morning
+      SqlType: float
+    - Name: MilkAmount_evening
+      MongoType: string
+      SqlName: MilkAmount_evening
+      SqlType: varchar
+    - Name: MilkAmount_morning
+      MongoType: string
+      SqlName: MilkAmount_morning
+      SqlType: varchar
+    - Name: Roughage
+      MongoType: float64
+      SqlName: Roughage
+      SqlType: float
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: Water
+      MongoType: float64
+      SqlName: Water
+      SqlType: float
+  - table: M77_Plau_D4-6
+    collection: M77_Plau_D4-6
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: Animalnumber
+      MongoType: string
+      SqlName: Animalnumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: ConcentrateSilo1
+      MongoType: float64
+      SqlName: ConcentrateSilo1
+      SqlType: float
+    - Name: ConcentrateSilo2
+      MongoType: float64
+      SqlName: ConcentrateSilo2
+      SqlType: float
+    - Name: ConcentrateSilo3
+      MongoType: float64
+      SqlName: ConcentrateSilo3
+      SqlType: float
+    - Name: ConcentrateSilo4
+      MongoType: float64
+      SqlName: ConcentrateSilo4
+      SqlType: float
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Liveweight_evening
+      MongoType: float64
+      SqlName: Liveweight_evening
+      SqlType: float
+    - Name: Liveweight_morning
+      MongoType: string
+      SqlName: Liveweight_morning
+      SqlType: varchar
+    - Name: MilkAmount_evening
+      MongoType: string
+      SqlName: MilkAmount_evening
+      SqlType: varchar
+    - Name: MilkAmount_morning
+      MongoType: string
+      SqlName: MilkAmount_morning
+      SqlType: varchar
+    - Name: Roughage
+      MongoType: float64
+      SqlName: Roughage
+      SqlType: float
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: Water
+      MongoType: float64
+      SqlName: Water
+      SqlType: float
+  - table: M77_Plau_D7-9
+    collection: M77_Plau_D7-9
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: Animalnumber
+      MongoType: string
+      SqlName: Animalnumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: ConcentrateSilo1
+      MongoType: float64
+      SqlName: ConcentrateSilo1
+      SqlType: float
+    - Name: ConcentrateSilo2
+      MongoType: float64
+      SqlName: ConcentrateSilo2
+      SqlType: float
+    - Name: ConcentrateSilo3
+      MongoType: float64
+      SqlName: ConcentrateSilo3
+      SqlType: float
+    - Name: ConcentrateSilo4
+      MongoType: float64
+      SqlName: ConcentrateSilo4
+      SqlType: float
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Liveweight_evening
+      MongoType: float64
+      SqlName: Liveweight_evening
+      SqlType: float
+    - Name: Liveweight_morning
+      MongoType: float64
+      SqlName: Liveweight_morning
+      SqlType: float
+    - Name: MilkAmount_evening
+      MongoType: string
+      SqlName: MilkAmount_evening
+      SqlType: varchar
+    - Name: MilkAmount_morning
+      MongoType: string
+      SqlName: MilkAmount_morning
+      SqlType: varchar
+    - Name: Roughage
+      MongoType: float64
+      SqlName: Roughage
+      SqlType: float
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: Water
+      MongoType: float64
+      SqlName: Water
+      SqlType: float
+  - table: M77_Roughage_singleIntake
+    collection: M77_Roughage_singleIntake
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: AnimalNumber
+      MongoType: string
+      SqlName: AnimalNumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: Duration
+      MongoType: float64
+      SqlName: Duration
+      SqlType: float
+    - Name: FeedingDevice
+      MongoType: string
+      SqlName: FeedingDevice
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: TroughWeightEnd
+      MongoType: float64
+      SqlName: TroughWeightEnd
+      SqlType: float
+    - Name: TroughWeightStart
+      MongoType: float64
+      SqlName: TroughWeightStart
+      SqlType: float
+  - table: M77_Roughage_singleIntake2025
+    collection: M77_Roughage_singleIntake2025
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: AnimalNumber
+      MongoType: string
+      SqlName: AnimalNumber
+      SqlType: varchar
+    - Name: Barn
+      MongoType: string
+      SqlName: Barn
+      SqlType: varchar
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: Duration
+      MongoType: float64
+      SqlName: Duration
+      SqlType: float
+    - Name: FeedingDevice
+      MongoType: string
+      SqlName: FeedingDevice
+      SqlType: varchar
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp
+    - Name: Transponder
+      MongoType: string
+      SqlName: Transponder
+      SqlType: varchar
+    - Name: TroughWeightEnd
+      MongoType: float64
+      SqlName: TroughWeightEnd
+      SqlType: float
+    - Name: TroughWeightStart
+      MongoType: float64
+      SqlName: TroughWeightStart
+      SqlType: float
+  - table: Roughage_cows_M73_Roughage1
+    collection: Roughage_cows_M73_Roughage1
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: objectid
+    - Name: AnimalID
+      MongoType: string
+      SqlName: AnimalID
+      SqlType: varchar
+    - Name: Date
+      MongoType: string
+      SqlName: Date
+      SqlType: varchar
+    - Name: Intake_R_cow
+      MongoType: float64
+      SqlName: Intake_R_cow
+      SqlType: float
+    - Name: IsoDate
+      MongoType: date
+      SqlName: IsoDate
+      SqlType: timestamp

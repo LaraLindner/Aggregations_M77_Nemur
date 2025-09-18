@@ -14,6 +14,21 @@ Die Skripte lassen sich direkt über die Konsole oder automatisiert via Cronjob 
 Wichtig! 
 Sollten die neu erzeugten Collections auch extern abrufbar sein müssen, setzen Sie sich bitte mit dem Support in Verbindung. In diesem Fall muss das entsprechende Zugriffs-Schema auf Seiten der MongoDB angepasst werden.
 
+Wichtig für Support:
+Anpassung Schema und Mongo drdl starten:
+
+Durchführung:
+1. Mit Admin auf BioInf Server einloggen
+2. Konsole öffnen
+3. folgende Konsoleneingabe tätigen, um neues Schema zu erstellen. Mann kann auch ein vorhandenes anpassen, dies ist aber sehr Fehleranfällig
+
+	<pre> ```bash
+	mongodrdl --db Masterdata --out NameSchema.drdl --host 127.0.0.1 --port 27018
+	``` </pre>
+4. starte Schema mit folgender Konsoleneingabe. Diese Konsole darf nicht geschlossen werden!
+	<pre> ```bash
+	mongosqld --schema NameSchema.drdl --addr 172.19.224.5:3307 --mongo-uri 172.19.224.5:27018
+	``` </pre>
 
 ## Support
 AG-Daten-BSW@fli.de
